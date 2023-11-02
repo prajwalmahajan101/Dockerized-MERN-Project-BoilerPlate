@@ -4,11 +4,12 @@
 	"main": "index.js",
 	"scripts": {
 		"dev": "nodemon src/app.ts",
-		"prod": "npm run build && npm start",
+		"prod": "npm run db:push && npm run build && npm start",
 		"build": "tsc",
 		"start": "node dist/app.js",
 		"ts": "tsc",
-		"prisma": "prisma"
+		"prisma": "prisma",
+		"db:push": "prisma db push"
 	},
 	"author": "",
 	"license": "ISC",

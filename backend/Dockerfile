@@ -7,11 +7,9 @@ COPY package.json .
 
 RUN npm i
 
-COPY tsconfig.json .
-COPY prisma .
-COPY src .
+COPY . .
 
 RUN npm run prisma -- generate
 
 
-CMD ["npm","run", "start"]
+CMD ["npm","run", "prod"]
