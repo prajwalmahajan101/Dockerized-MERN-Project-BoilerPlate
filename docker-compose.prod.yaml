@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  f-build:
+    build: ./frontend
+    volumes:
+      - prod-f_modules:/app/node_modules
+      - prod-f-build-data:/app/build
+  api:
+    build: ./backend
+    volumes:
+      - prod-api_modules:/app/node_modules
+    env_file:
+      - ./envs/backend.prod.env
+    ports:
+      - 8000:8000
+  nginx:
+    build: ./nginx
+    volumes:
+      - prod-f-build-data:/usr/share/nginx/html
+    ports:
+      - 80:80
+    depends_on:
+      - api
+      - f-build
+volumes:
+  prod-f-build-data:
+  prod-f_modules:
+  prod-api_modules:

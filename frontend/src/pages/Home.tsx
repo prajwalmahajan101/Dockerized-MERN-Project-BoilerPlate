@@ -10,7 +10,7 @@ const HomePage = ()=>{
     getData().then(res=>console.log(res)).catch(err=>console.log(err));
   },[])
   return(
-    <div>Hello There! HomePage</div>
+    <div className={"text-3xl font-bold underline"}>Hello There! HomePage</div>
   )
 }
 
