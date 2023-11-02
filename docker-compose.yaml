@@ -1,0 +1,50 @@
+version: '3.8'
+services:
+    npm:
+        build: ./backend
+        volumes:
+            - ./backend/package.json:/app/package.json
+            - ./backend/node_modules:/app/node_modules
+            # - ./backend:/app
+        entrypoint: ['npm']
+        env_file:
+            - ./envs/backend.dev.env
+
+    f-npm:
+        build: ./frontend
+        volumes:
+            - ./frontend/package.json:/app/package.json
+            - ./frontend/node_modules:/app/node_modules
+        entrypoint: ['npm']
+
+    # imp
+    f-build:
+        build: ./frontend
+        volumes:
+            - ./frontend/src:/app/src
+            - f-build-data:/app/build
+    
+    api:
+        build: ./backend
+        volumes:
+            - ./backend/src:/app/src
+            - api_modules:/app/node_modules
+        env_file:
+            - ./envs/backend.dev.env
+        entrypoint: ['npm', 'run', 'dev']
+        ports:
+            - 8000:8000
+
+    nginx:
+        build: ./nginx
+        volumes:
+            - f-build-data:/usr/share/nginx/html
+        ports:
+            - 80:80
+        depends_on:
+            - api
+            - f-build
+
+volumes:
+    f-build-data:
+    api_modules:
