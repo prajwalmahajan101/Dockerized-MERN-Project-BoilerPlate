@@ -3,9 +3,7 @@ services:
     npm:
         build: ./backend
         volumes:
-            - ./backend/package.json:/app/package.json
-            - ./backend/node_modules:/app/node_modules
-            # - ./backend:/app
+            - ./backend:/app
         entrypoint: ['npm']
         env_file:
             - ./envs/backend.dev.env
@@ -23,7 +21,7 @@ services:
         volumes:
             - ./frontend/src:/app/src
             - f-build-data:/app/build
-    
+
     api:
         build: ./backend
         volumes:
