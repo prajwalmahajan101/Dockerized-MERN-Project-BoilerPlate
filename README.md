@@ -1,1 +1,2 @@
-# ***Basic Structure For MERN + TypeScript + Prisma Project***
+# ***Basic Structure For MERN + TypeScript + Prisma ORM + TailwindCSS Project***
+
